@@ -31,10 +31,25 @@ let app = new Vue({
                 let chunk = hash.substr(i * 5, 5);
                 let roll = parseInt(chunk, 16);
                 if(roll <= this.MAX_ROLL) {
-                    return roll;
+                    return {
+                        roll: roll,
+                        index: i * 5,
+                        chunk: chunk
+                    };
                 }
             }
-            return parseInt(hash.substr(125, 3), 16);
+            return {
+                roll: parseInt(hash.substr(125, 3), 16),
+                index: 125,
+                chunk: hash.substr(125, 3)
+            };
+        },
+        htmlTemplateHash: function() {
+            let hash = this.hmacsha512(this.serverSeed, this.clientSeed, this.nonce);
+            let index = this.hashToRoll(hash).index;
+            let length = index < 125 ? 5 : 3;
+            // Please take note of the use of both substring and substr below
+            return `${hash.substring(0, index)}<strong>${hash.substr(index, length)}</strong>${hash.substring(index+length, 128)}`;
         },
         handleFileInput: function(files) {
             let file = files[0];
@@ -65,7 +80,7 @@ let app = new Vue({
                         profit: parseFloat(line[6])/this.SATOSHIS,
                         jackpot_profit: parseFloat(line[7])/this.SATOSHIS || 0
                     };
-                    roll.verified = this.hashToRoll(this.hmacsha512(this.serverSeed, this.clientSeed, roll.nonce)) === roll.roll;
+                    roll.verified = this.hashToRoll(this.hmacsha512(this.serverSeed, this.clientSeed, roll.nonce)).roll === roll.roll;
                     this.verifiedRolls.push(roll);
                 }
             }

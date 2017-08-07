@@ -1,7 +1,45 @@
+a {
+    text-decoration: none;
+    color: #260C1A;
+}
+
 body {
     color: #FFFFFF;
     font-family: sans-serif;
     background-color: #263238;
+}
+
+h1 {
+    text-align: center;
+}
+
+input {
+    display: block;
+    margin: 15px;
+    border: none;
+    padding: 3px;
+    width: 40%;
+}
+
+pre {
+    overflow-x: scroll;
+    text-align: left;
+}
+
+pre strong {
+    font-size: 125%;
+}
+
+pre::-webkit-scrollbar {
+    height: 6px;
+}
+
+pre::-webkit-scrollbar-thumb {
+    background-color: #263238;
+}
+
+td {
+    padding: 3px;
 }
 
 .center-box {
@@ -14,27 +52,6 @@ body {
 
 .donation {
     text-align: center;
-    color: #260C1A;
-}
-
-input {
-    display: block;
-    margin: 15px;
-    border: none;
-    padding: 3px;
-    width: 40%;
-}
-
-td {
-    padding: 3px;
-}
-
-h1 {
-    text-align: center;
-}
-
-a {
-    text-decoration: none;
     color: #260C1A;
 }
 
