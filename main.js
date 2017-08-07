@@ -2,6 +2,7 @@ let app = new Vue({
     el: '#app',
     data: {
         MAX_ROLL: 999999,
+        SATOSHIS: 100000000,
         serverSeed: '',
         serverSeedHash: '',
         clientSeed: '',
@@ -60,9 +61,9 @@ let app = new Vue({
                         roll: parseInt(line[2]),
                         target: line[3],
                         range: line[4],
-                        amount: line[5],
-                        profit: line[6],
-                        jackpot_profit: line[7] || 0
+                        amount: parseFloat(line[5])/this.SATOSHIS,
+                        profit: parseFloat(line[6])/this.SATOSHIS,
+                        jackpot_profit: parseFloat(line[7])/this.SATOSHIS || 0
                     };
                     roll.verified = this.hashToRoll(this.hmacsha512(this.serverSeed, this.clientSeed, roll.nonce)) === roll.roll;
                     this.verifiedRolls.push(roll);
