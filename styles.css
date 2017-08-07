@@ -1,0 +1,25 @@
+body {
+    color: #FFFFFF;
+    font-family: sans-serif;
+    background-color: #263238;
+}
+
+.center-box {
+    width: 50%;
+    margin: 10px auto 10px auto;
+    background-color: #658999;
+    text-align: center;
+    padding: 10px;
+}
+
+input {
+    display: block;
+    margin: 15px;
+    border: none;
+    padding: 3px;
+    width: 40%;
+}
+
+td {
+    padding: 3px;
+}

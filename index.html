@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>YOLOdice Roll Verifier</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="https://unpkg.com/node-forge@0.7.0/dist/forge.min.js"></script>
+        <script src="https://unpkg.com/vue@2.4.2"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div id="input" class="center-box">
+                <h2>Input</h2>
+                <input v-model="serverSeed" type="text" placeholder="Server Seed">
+                <input v-model="serverSeedHash" type="text" placeholder="Server Seed Hash">
+                <input v-model="clientSeed" type="text" placeholder="Client Seed">
+                <input v-model="nonce" type="number" placeholder="Nonce">
+                <h3>Or</h3>
+                <p>Choose a CSV file exported from the site</p>
+                <input id="fileInput" type="file" accept=".csv" onchange="app.handleFileInput(this.files)">
+            </div>
+            <div id="output" class="center-box">
+                <h2>Output</h2>
+                <h3 v-if="serverSeed && clientSeed && nonce">Roll: {{hashToRoll(hmacsha512(serverSeed, clientSeed, nonce))}}</h3>
+                <h3 v-if="serverSeedHash">{{sha256(serverSeed) === serverSeedHash ? 'Server seed matches' : 'Server seed does not match'}}</h3>
+                <h3 v-if="verifiedRolls.length > 0">{{allBetsVerify() ? 'All CSV bets have been verified' : 'One or more bets does not check out'}}</h3>
+                <table v-if="verifiedRolls.length > 0">
+                    <tr>
+                        <td>Bet ID</td>
+                        <td>Nonce</td>
+                        <td>Roll</td>
+                        <td>Target</td>
+                        <td>Range</td>
+                        <td>Amount</td>
+                        <td>Profit</td>
+                        <td>Jackpot Profit</td>
+                        <td><strong>Verified</strong></td>
+                    </tr>
+                    <tr v-for="roll in verifiedRolls">
+                        <td>{{roll.bet_id}}</td>
+                        <td>{{roll.nonce}}</td>
+                        <td>{{roll.roll}}</td>
+                        <td>{{roll.target}}</td>
+                        <td>{{roll.range}}</td>
+                        <td>{{roll.amount}}</td>
+                        <td>{{roll.profit}}</td>
+                        <td>{{roll.jackpot_profit}}</td>
+                        <td><strong>{{roll.verified}}</strong></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <script src="main.js"></script>
+    </body>
+</html>
