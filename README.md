@@ -4,6 +4,8 @@ A simple javascript website utilizing [forge](https://github.com/digitalbazaar/f
 
 Supports both manual entry and input of the CSV files the website provides.
 
+Also supports data entry via URL parameters (`server_seed`, `server_seed_hash`, `client_seed`, and `nonce`)
+
 Please note that provable fairness is only effective if you take note of the server seed hash before you start betting, and set your own client seeds.
 
 Please consider donating 1KW1yj5JJukm3JFS7H4nNyt5zQyzcKz9La

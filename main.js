@@ -1,4 +1,7 @@
+const router = new VueRouter();
+
 let app = new Vue({
+    router,
     el: '#app',
     data: {
         MAX_ROLL: 999999,
@@ -13,6 +16,10 @@ let app = new Vue({
         if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
             alert('The File APIs are not fully supported in this browser.');
         }
+        this.serverSeed = this.$route.query.server_seed || '';
+        this.serverSeedHash = this.$route.query.server_seed_hash || '';
+        this.clientSeed = this.$route.query.client_seed || '';
+        this.nonce = this.$route.query.nonce || 1;
     },
     methods: {
         hmacsha512: function(K, K2, n) {
