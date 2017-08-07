@@ -12,6 +12,11 @@ body {
     padding: 10px;
 }
 
+.donation {
+    text-align: center;
+    color: #260C1A;
+}
+
 input {
     display: block;
     margin: 15px;
@@ -22,4 +27,13 @@ input {
 
 td {
     padding: 3px;
+}
+
+h1 {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #260C1A;
 }
